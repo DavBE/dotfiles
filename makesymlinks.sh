@@ -8,7 +8,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="bashrc screenrc"    # list of files/folders to symlink in homedir
+files="bashrc screenrc gitconfig"    # list of files/folders to symlink in homedir
 
 ##########
 

@@ -1,97 +1,63 @@
-" Activate all the handy Windows key-bindings we're used to.
-"source $VIMRUNTIME/mswin.vim
+set nocompatible              " Vim mode, not vi mode
+filetype off                  " required
 
-" Display status bar at the bottom
-set laststatus=2
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" Display line and column number in bottom ruler.
-set ruler
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 
-" Display the line numbers.
-set number
+" Plugins
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'vim-scripts/indentpython.vim'
+Bundle 'Valloric/YouCompleteMe'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'nvie/vim-flake8'
 
-" Turn sounds off.
-set visualbell
+call vundle#end()            " required
 
-" Shows a horizontal highlight on the line with the cursor.
-"set cursorline
+filetype plugin indent on    " Enable automatic settings based on file type
+syntax on                    " Enable color syntax highlighting
+set laststatus=2             " Display status bar at the bottom
+set ruler                    " Display line and column number in status bar
+set number                   " Display the line numbers.
+set visualbell               " Turn sounds off.
 
-" Activate syntax highlighting.
-syntax enable
+set cursorline               " Shows a horizontal highlight on the line
+                             " with the cursor.
 
-" Activate highlighting search pattern matches & incremental search.
-" Incremental search means your cursor will jump to the first match as you
-" type.
-set hlsearch
-set incsearch
+set hlsearch                 " Activate highlighting search pattern
+set incsearch                " Activate incremental search
+set ignorecase               " Activate case-insensitive search
+set smartcase                " Activate smart case search
 
-" Allow using  to kill the current search highlighting.
-"nnoremap   :nohlsearch
+set wildmenu                 " Set wildchar visual completion awesomeness.
+set wildmode=full            " This is enhanced command line completion and
+                                         " it rocks.
 
-" Activate case-insensitive & smart case search (if a capital letter is used
-" in your search query, Vim will search case-sensitive).
-set ignorecase 
-set smartcase
+set encoding=utf-8
+"set mouse=a
 
-" Set wildchar visual completion awesomeness.
-" This is enhanced command line completion and it rocks.
-set wildmenu 
-set wildmode=full
+let mapleader = ","          " Set a more convenient leader key on an AZERTY
+                             " layout than the default backslash
 
-" Turning on line wrapping and line-break for easy text-file editing.
-" Line-break wraps full words at the end of a sentence for readability.
-"set wrap
-"set linebreak
+" Disable beep and flash
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
-" Set a nice theme.
-color deepsea
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
 
-if has("gui_running")
-  " Set a nicer font.
-  set guifont=Consolas:h10:cDEFAULT
-  " Hide the toolbar.
-  set guioptions-=T
-  " Remove right-hand scroll bar
-  "set guioptions-=r
-  "set guioptions-=m  "remove menu bar
-  "set guioptions-=L  "remove left-hand scroll bar
+" Enable folding with the spacebar
+nnoremap <space> za
 
-  " Set heigth and width
-  set lines=30 columns=120
-endif
-
-" Use unicode/utf-8 encoding by default for keyboard, display and files.
-"set encoding=utf-8
-
-" Set a more convenient leader key on an AZERTY layout than the default backslash
-let mapleader = ","
-
-" Programming
-
-" Set tabs to 4 characters and expand to spaces, activate smart indentation.
-" See tabstop help for more info.
-" Setting tabstop & softtabstop to the same value to avoid messy layout with mixed tabs & spaces.
-"set tabstop=4
-"set shiftwidth=4
-"set softtabstop=4
-"set expandtab
-"set smartindent
-
-" Enabled folding on indent level. That way it works on any code & html, xml
-" etc. 
-" Setting foldlevelstart ensures that for newly opened files folds are open
-" unless they are 10 levels deep.
-"set foldmethod=indent
-"set foldenable
-"set foldlevelstart=10
-"set foldnestmax=10      " no more than 10 fold levels please
-
-" Unmap the arrow keys
-"noremap <Up> <NOP>
-"noremap <Down> <NOP>
-"noremap <Left> <NOP>
-"noremap <Right> <NOP>
-
+" Mappings
 no <Up> <NOP>
 no <Down> <NOP>
 no <Left> <NOP>
@@ -102,3 +68,45 @@ ino <Down> <NOP>
 ino <Left> <NOP>
 ino <Right> <NOP>
 
+nnoremap <C-N> :NERDTreeToggle<CR>
+noremap <leader>l :ls<CR>:b<SPACE>
+nnoremap <silent> <C-l> :nohl<CR><C-l>
+
+" F5
+imap <Esc>[15~ <Esc>:w<CR>:!clear;python %<CR>
+noremap <Esc>[15~ <Esc>:w<CR>:!clear;python %<CR>
+
+" Alt-Left
+noremap <Esc>[1;3C :bn<CR>
+" Alt-Right
+noremap <Esc>[1;3D :bp<CR>
+
+colors jellybeans
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+
+" Airline options
+let g:airline_powerline_fonts = 1
+let g:Powerline_symbols="fancy"
+let g:airline#extensions#tabline#enabled = 1
+
+" SymplyFold options
+let g:SimpylFold_docstring_preview=1
+
+" YouCompleteMe eoptions
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+let python_highlight_all=1

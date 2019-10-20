@@ -1,4 +1,20 @@
-hardstatus alwayslastline '%{= kg}[ %{G}%H %{g}][%= %{= kB}%?%-Lw%?%{+b r}(%{G}%n*%f %t%?(%u)%?%{r})%{-b B}%?%+Lw%?%?%= %{g}%]'
+#Turn off that annoying start up message
+startup_message off
 
-defutf8 on
+# Turn the even more annoying whole-screen-flash-on-tab-complete "feature"
+vbell off
+
+# Window list at the bottom. hostname, centered tabs and redmarked active windows:
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %S %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+#hardstatus alwayslastline "%{= G}%{g}[ %{G}%H %{g}][ %?%-Lw%?%{R} %n*%f %t %{g}%?%+Lw%? %{g}]%=%{g}[ %{W}%c:%s %{g}]"
+
+#caption splitonly "%{= g}[%n %t]"
+#caption splitonly "%{= g}[%n %t]"
+#caption splitonly "%?%F%{.G.}%?%3n %t%? [%h]%?"
+caption splitonly "%?%F%{= KB}%:%{= KW}%?%w"
+
 term screen-256color
+
+#windowlist string "%4n %t %h%f"
+#windowlist string "%4n %h%=%f"

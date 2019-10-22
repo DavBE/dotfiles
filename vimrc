@@ -1,61 +1,62 @@
-set nocompatible              " Vim mode, not vi mode
-filetype off                  " required
+set nocompatible                        " Vim mode, not vi mode
+filetype off                            " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+set rtp+=~/.vim/bundle/Vundle.vim       " set the runtime path to include 
+call vundle#begin()                     " Vundle and initialize
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'gmarik/Vundle.vim'              " let Vundle manage Vundle, required
 
 " Plugins
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tmhedberg/SimpylFold'
-Plugin 'vim-scripts/indentpython.vim'
+Plugin 'nanotech/jellybeans.vim'        " Color scheme
+Plugin 'vim-airline/vim-airline'        " Status bar & tabs
+Plugin 'scrooloose/nerdtree'            " Tree explorer
+Plugin 'kien/ctrlp.vim'                 " Fuzzy file, buffer, mru, ... finder
+Plugin 'tmhedberg/SimpylFold'           " Simple, correct folding for Python
+Plugin 'vim-scripts/indentpython.vim'   " Indentation script for python
 Bundle 'Valloric/YouCompleteMe'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'nvie/vim-flake8'
+Plugin 'vim-syntastic/syntastic'        " Syntax checking
+Plugin 'nvie/vim-flake8'                " Runs open file through Flake8
+Plugin 'qpkorr/vim-bufkill'             " Delete buffer without closing window
 
-call vundle#end()            " required
+call vundle#end()                       " required
 
-filetype plugin indent on    " Enable automatic settings based on file type
-syntax on                    " Enable color syntax highlighting
-set laststatus=2             " Display status bar at the bottom
-set ruler                    " Display line and column number in status bar
-set number                   " Display the line numbers.
-set visualbell               " Turn sounds off.
+filetype plugin indent on               " Enable automatic settings based on 
+                                        " file type
 
-set cursorline               " Shows a horizontal highlight on the line
-                             " with the cursor.
+syntax on                               " Enable color syntax highlighting
+set laststatus=2                        " Display status bar at the bottom
+set ruler                               " Display line and column number in 
+                                        " status bar 
+                                        
+set number                              " Display the line numbers
+set visualbell                          " Turn sounds off
 
-set hlsearch                 " Activate highlighting search pattern
-set incsearch                " Activate incremental search
-set ignorecase               " Activate case-insensitive search
-set smartcase                " Activate smart case search
+set cursorline                          " Shows a horizontal highlight on the 
+                                        " line with the cursor
+                                
+set hlsearch                            " Activate highlighting search pattern 
+set incsearch                           " Activate incremental search 
+set ignorecase                          " Activate case-insensitive search
+set smartcase                           " Activate smart case search
 
-set wildmenu                 " Set wildchar visual completion awesomeness.
-set wildmode=full            " This is enhanced command line completion and
-                                         " it rocks.
+set wildmenu                            " Set wildchar visual completion 
+                                        " awesomeness
+
+set wildmode=full                       " This is enhanced command line 
+                                        " completion and it rocks
 
 set encoding=utf-8
-"set mouse=a
 
-let mapleader = ","          " Set a more convenient leader key on an AZERTY
-                             " layout than the default backslash
+let mapleader = ","                     " Set a more convenient leader key on 
+                                        " an AZERTY layout than the default \
 
-" Disable beep and flash
-set noerrorbells visualbell t_vb=
+set noerrorbells visualbell t_vb=       " Disable beep and flash 
 autocmd GUIEnter * set visualbell t_vb=
 
-" Enable folding
-set foldmethod=indent
+set foldmethod=indent                   " Enable folding
 set foldlevel=99
 
-" Enable folding with the spacebar
-nnoremap <space> za
+nnoremap <space> za                     " Enable folding with the spacebar
 
 " Mappings
 no <Up> <NOP>
@@ -69,6 +70,7 @@ ino <Left> <NOP>
 ino <Right> <NOP>
 
 nnoremap <C-N> :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 noremap <leader>l :ls<CR>:b<SPACE>
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
@@ -76,10 +78,8 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 imap <Esc>[15~ <Esc>:w<CR>:!clear;python %<CR>
 noremap <Esc>[15~ <Esc>:w<CR>:!clear;python %<CR>
 
-" Alt-Left
-noremap <Esc>[1;3C :bn<CR>
-" Alt-Right
-noremap <Esc>[1;3D :bp<CR>
+noremap <Esc>[1;3C :bn<CR>              " Alt-Left
+noremap <Esc>[1;3D :bp<CR>              " Alt-Right
 
 colors jellybeans
 
@@ -101,6 +101,10 @@ au BufNewFile,BufRead *.js, *.html, *.css
 let g:airline_powerline_fonts = 1
 let g:Powerline_symbols="fancy"
 let g:airline#extensions#tabline#enabled = 1
+
+" NERDTree options
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 1
 
 " SymplyFold options
 let g:SimpylFold_docstring_preview=1
